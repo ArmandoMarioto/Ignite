@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
   "scripts": {
+    "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/ArmandoMarioto/Ignite/issues"
   },
-  "homepage": "https://github.com/ArmandoMarioto/Ignite#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "homepage": "https://github.com/ArmandoMarioto/Ignite#readme"
 }
