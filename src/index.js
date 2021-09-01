@@ -2,7 +2,8 @@ const express = require('express');
 
 const app = express();
 /**
- * Utilizando os métodos HTTP
+ * Utilizando os métodos HTTP 
+ * 
  * GET - Buscar uma informação dentro do servidor
  * POST - Inserir uma informção no servidor
  * PUT - Alterar uma informação no servidor
