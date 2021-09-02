@@ -5,6 +5,7 @@
  * Listando extrato
  * Validando a conta
  * Middlewares
+ * Criando depósito na conta
  */
 
 const { response } = require('express');
@@ -21,12 +22,12 @@ function verifyIfExistsAcccountCPF(request,response,next){
 
     const {cpf} = request.headers;
 
-    const custemer = customers.find(custemer => custemer.cpf === cpf);
-    if(!custemer){
+    const customer = customers.find(customer => customer.cpf === cpf);
+    if(!customer){
         return response.status(400).json({error: "Customer not found"});
     }
 
-    request.customers = custemer;
+    request.customers = customer;
     return next();
 
 }
@@ -69,7 +70,24 @@ app.post("/account",(request,response) =>{
 app.get("/statement",verifyIfExistsAcccountCPF,(request,response) =>{
     const {customers} = request;
     return response.json(customers.statement);
-})
+});
+
+
+app.post("/deposit",verifyIfExistsAcccountCPF,(request , response)=>{
+    const { description , amount} = request.body;
+    const {customers} = request;
+    console.log(customers);
+    const statementOperation = {
+        description,
+        amount,
+        created_at: new Date(),
+        type: "credit"
+    };
+
+    customers.statement.push(statementOperation);
+
+    return response.status(201).send();
+});
 
 
 
