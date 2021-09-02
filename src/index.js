@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const { v4: uuidv4 } = require("uuid");
 
@@ -33,6 +34,17 @@ app.post("/account",(request,response) =>{
 
     return response.status(201).send();
 });
+
+
+//rota de pegar um statement de um usuario pelo cpf
+app.get("/statement/:cpf",(request,response) =>{
+
+    const {cpf} = request.params;
+
+    const custemer = customers.find(custemer => custemer.cpf === cpf);
+
+    return response.json(custemer.statement);
+})
 
 //localhost:3333
 app.listen(3333);
