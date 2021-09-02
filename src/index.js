@@ -1,3 +1,11 @@
+/**
+ * Conhecendo os requisitos da aplicação
+ * Cadastro de conta
+ * Validando CPF existente
+ * Listando extrato
+ * Validando a conta
+ */
+
 const { response } = require('express');
 const express = require('express');
 const { v4: uuidv4 } = require("uuid");
@@ -37,12 +45,16 @@ app.post("/account",(request,response) =>{
 
 
 //rota de pegar um statement de um usuario pelo cpf
-app.get("/statement/:cpf",(request,response) =>{
+app.get("/statement",(request,response) =>{
 
-    const {cpf} = request.params;
+    const {cpf} = request.headers;
 
     const custemer = customers.find(custemer => custemer.cpf === cpf);
 
+
+    if(!custemer){
+        return response.status(400).json({error: "Customer not found"});
+    }
     return response.json(custemer.statement);
 })
 
