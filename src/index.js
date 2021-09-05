@@ -76,7 +76,6 @@ app.get("/statement",verifyIfExistsAcccountCPF,(request,response) =>{
 app.post("/deposit",verifyIfExistsAcccountCPF,(request , response)=>{
     const { description , amount} = request.body;
     const {customers} = request;
-    console.log(customers);
     const statementOperation = {
         description,
         amount,
