@@ -6,6 +6,7 @@
  * Validando a conta
  * Middlewares
  * Criando depósito na conta
+ * Listar extrato bancário por data
  */
 
 const { response } = require('express');
@@ -118,7 +119,19 @@ app.post("/withdraw",verifyIfExistsAcccountCPF,(request,response)=>{
 
     customers.statement.push(statementOperation);
     return response.status(201).send();
+});
 
+app.get("/statement/date",verifyIfExistsAcccountCPF,(request,response) =>{
+    const {customers} = request;
+    const { date } = request.query;
+
+    const dateFormat = new Date(date + " 00:00");
+
+    const statement = customers.statement.filter(
+        (statement) => 
+            statement.created_at.toDateString() === 
+            new Date(dateFormat).toDateString());
+    return response.json(statement);
 });
 
 
