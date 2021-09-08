@@ -7,9 +7,10 @@
  * Middlewares
  * Criando depósito na conta
  * Listar extrato bancário por data
+ * Atualizar conta
  */
 
-const { response } = require('express');
+const { response, request } = require('express');
 const express = require('express');
 const { v4: uuidv4 } = require("uuid");
 
@@ -132,6 +133,20 @@ app.get("/statement/date",verifyIfExistsAcccountCPF,(request,response) =>{
             statement.created_at.toDateString() === 
             new Date(dateFormat).toDateString());
     return response.json(statement);
+});
+
+
+app.put("/account",verifyIfExistsAcccountCPF,(request, response) =>{
+    const { name } = request.body;
+    const { customers } = request;
+    customers.name = name;
+
+    return response.status(201).send();
+});
+
+app.get("/account",verifyIfExistsAcccountCPF,(request,response) =>{
+    const { customers } = request;
+    return response.json(customers);
 });
 
 
