@@ -91,7 +91,7 @@ app.get("/statement",verifyIfExistsAcccountCPF,(request,response) =>{
 
 app.post("/deposit",verifyIfExistsAcccountCPF,(request , response)=>{
     const { description , amount} = request.body;
-    const {customers} = request;
+    const {customer} = request;
     const statementOperation = {
         description,
         amount,
